@@ -7,22 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id ="answers">
         <h1>Level 1</h1>
         <p>What is 6 × 7?</p>
         <input type="text" id="answer-input" placeholder="Your answer...">
         <button class="button" onclick="submitAnswer()">Submit</button>
         <p id="error-message"></p>
     </div>
-
+    <script src="levels.js"></script>
     <script src="script.js"></script>
-    <script>
-        const encryptedBlob = '{"iv_b64":"Nv2lA7A9x/AS8uh+","ct_b64":"5v5yJ9j5FzT+N6V7L6e/QtU2Fw=="}';
-
-        function submitAnswer() {
-            const userAnswer = document.getElementById('answer-input').value;
-            solvePuzzle(userAnswer, encryptedBlob);
-        }
-    </script>
 </body>
 </html>
