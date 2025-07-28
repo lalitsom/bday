@@ -1,6 +1,99 @@
-// ssubmitAnswer() function from game.html
+async function submitAnswer() {
+    const answerInput = document.getElementById('answer-input');
+    const errorMessage = document.getElementById('error-message');
+    const levelTitle = document.querySelector('h1').textContent.toLowerCase().replace(' ', '');
+    const rawAnswer = answerInput.value.trim().toLowerCase();
 
-// what this function will do take input from text trim it, lower case it and do hash.
-// levels.js is already loaded
-// with current level name check in answers table, if hash matches than use plain input(unhashed), and decrypt levelCode[nextlevel]
-// decrypted levelcode should replace level_div, same thing will happen until level11
+    if (!rawAnswer) {
+        errorMessage.textContent = 'Please enter an answer.';
+        return;
+    }
+
+    const hashedAnswer = await hashString(rawAnswer);
+
+    if (answers[levelTitle] === hashedAnswer) {
+        errorMessage.textContent = '';
+        const currentLevelNum = parseInt(levelTitle.replace('level', ''), 10);
+
+        if (currentLevelNum === 11) {
+            document.getElementById('answers').innerHTML = '<h1>Congratulations!</h1><p>You have completed all levels.</p>';
+            return;
+        }
+
+        const nextLevelNum = currentLevelNum + 1;
+        const nextLevelKey = `level${nextLevelNum}`;
+        const encryptedHex = levelCode[nextLevelKey];
+
+        try {
+            const decryptedHtml = await decryptData(encryptedHex, rawAnswer);
+            document.getElementById('answers').innerHTML = decryptedHtml;
+        } catch (error) {
+            console.error('Decryption failed:', error);
+            errorMessage.textContent = 'Could not load the next level. Data might be corrupt.';
+        }
+    } else {
+        errorMessage.textContent = 'Wrong answer. Please try again.';
+    }
+}
+
+async function hashString(str) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(str);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
+
+async function decryptData(encryptedHex, password) {
+    // Convert hex string to Uint8Array
+    const encryptedBytes = new Uint8Array(encryptedHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+
+    // As per OpenSSL's "Salted__" format, the first 8 bytes are salt.
+    const salt = encryptedBytes.slice(8, 16);
+    const ciphertext = encryptedBytes.slice(16);
+
+    // Derive key and IV from password and salt using PBKDF2
+    const passwordKey = await crypto.subtle.importKey(
+        'raw',
+        new TextEncoder().encode(password), {
+            name: 'PBKDF2'
+        },
+        false,
+        ['deriveBits']
+    );
+
+    // AES key is 256 bits (32 bytes), IV is 128 bits (16 bytes)
+    const derivedBits = await crypto.subtle.deriveBits({
+            name: 'PBKDF2',
+            salt: salt,
+            iterations: 10000, // A reasonable number of iterations
+            hash: 'SHA-256',
+        },
+        passwordKey,
+        256 + 128 // 32-byte key + 16-byte IV
+    );
+
+    const key = derivedBits.slice(0, 32);
+    const iv = derivedBits.slice(32, 48);
+
+    const aesKey = await crypto.subtle.importKey(
+        'raw',
+        key, {
+            name: 'AES-CBC',
+            length: 256
+        },
+        false,
+        ['decrypt']
+    );
+
+    const decryptedBuffer = await crypto.subtle.decrypt({
+            name: 'AES-CBC',
+            iv: iv
+        },
+        aesKey,
+        ciphertext
+    );
+
+    return new TextDecoder().decode(decryptedBuffer);
+}
