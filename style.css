@@ -1,52 +1,57 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #1a237e; /* Deep blue */
+    color: #ffffff;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    text-align: center;
 }
 
 .container {
-    background: white;
+    background: #2c3e50; /* Dark slate */
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border: 3px solid #ffd700; /* Gold */
+    max-width: 600px;
     width: 90%;
 }
 
 h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #1c1e21;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #ffd700; /* Gold */
+    text-shadow: 3px 3px 0px #000;
 }
 
 p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    color: #ecf0f1; /* Light gray */
 }
 
 .button {
     display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
+    background-color: #ffd700; /* Gold */
+    color: #1a237e; /* Deep blue */
+    padding: 1rem 2rem;
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: bold;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #f1c40f; /* Sunflower yellow */
+    transform: translateY(-3px);
 }
 
 input[type="text"] {
@@ -56,10 +61,11 @@ input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 6px;
     margin-bottom: 1rem;
+    font-family: 'Press Start 2P', cursive;
 }
 
 #error-message {
-    color: #d93025;
+    color: #e74c3c; /* Alizarin red */
     margin-top: 1rem;
     min-height: 1.2em;
 }
@@ -76,10 +82,11 @@ textarea {
 }
 
 #output {
-    background-color: #f8f9fa;
+    background-color: #34495e; /* Wet asphalt */
     padding: 1rem;
     border-radius: 6px;
-    border: 1px solid #e9ecef;
+    border: 1px solid #2c3e50; /* Dark slate */
+    color: #ecf0f1; /* Light gray */
     white-space: pre-wrap;
     word-wrap: break-word;
     text-align: left;
