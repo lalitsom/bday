@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Press+Start+2P&display=swap');
+
 body {
-    font-family: 'Press Start 2P', cursive;
-    background-color: #1a237e; /* Deep blue */
-    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f2f5; /* Light gray */
+    color: #333;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -11,85 +13,87 @@ body {
 }
 
 .container {
-    background: #2c3e50; /* Dark slate */
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    border: 3px solid #ffd700; /* Gold */
+    background: #ffffff; /* White */
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0; /* Light border */
     max-width: 600px;
     width: 90%;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.2rem;
     margin-bottom: 1.5rem;
-    color: #ffd700; /* Gold */
-    text-shadow: 3px 3px 0px #000;
+    color: #4a90e2; /* Soothing blue */
+    text-shadow: none;
 }
 
 p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 2rem;
-    line-height: 1.8;
-    color: #ecf0f1; /* Light gray */
+    line-height: 1.6;
+    color: #555; /* Darker gray for text */
 }
 
 .button {
     display: inline-block;
-    background-color: #ffd700; /* Gold */
-    color: #1a237e; /* Deep blue */
+    background-color: #4a90e2; /* Soothing blue */
+    color: #ffffff; /* White */
     padding: 1rem 2rem;
-    border-radius: 8px;
+    border-radius: 10px;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     border: none;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
 .button:hover {
-    background-color: #f1c40f; /* Sunflower yellow */
-    transform: translateY(-3px);
+    background-color: #357abd; /* Darker soothing blue */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
 }
 
 input[type="text"] {
     width: calc(100% - 2rem);
-    padding: 0.75rem;
+    padding: 0.85rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     margin-bottom: 1rem;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #error-message {
-    color: #e74c3c; /* Alizarin red */
+    color: #e57373; /* Softer red */
     margin-top: 1rem;
     min-height: 1.2em;
 }
 
 textarea {
     width: calc(100% - 2rem);
-    padding: 0.75rem;
+    padding: 0.85rem;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     margin-bottom: 1rem;
     min-height: 150px;
-    font-family: monospace;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 #output {
-    background-color: #34495e; /* Wet asphalt */
-    padding: 1rem;
-    border-radius: 6px;
-    border: 1px solid #2c3e50; /* Dark slate */
-    color: #ecf0f1; /* Light gray */
+    background-color: #f8f9fa; /* Very light gray */
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0; /* Light border */
+    color: #333; /* Dark text */
     white-space: pre-wrap;
     word-wrap: break-word;
     text-align: left;
-    font-family: monospace;
-    font-size: 0.9rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
 }
