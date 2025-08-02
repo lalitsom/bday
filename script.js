@@ -18,8 +18,9 @@ async function submitAnswer() {
         errorMessage.textContent = '';
         const currentLevelNum = parseInt(levelTitle.replace('level', ''), 10);
 
-        if (currentLevelNum === 11) {
-            document.getElementById('answers').innerHTML = '<h1>Congratulations!</h1><p>Till Next time, To Be Continued....</p>';
+        if (currentLevelNum === 7) {
+            document.getElementById('questions').innerHTML = 
+            '<h1>Congratulations! and Happy Birthday</h1><p>Till Next time, To be continue....😛</p>';
             return;
         }
 
@@ -29,7 +30,7 @@ async function submitAnswer() {
 
         try {
             const decryptedHtml = await decryptData(encryptedHex, rawAnswer);
-            document.getElementById('answers').innerHTML = decryptedHtml;
+            document.getElementById('questions').innerHTML = decryptedHtml;
         } catch (error) {
             console.error('Decryption failed:', error);
             errorMessage.textContent = 'Could not load the next level. Data might be corrupt.';

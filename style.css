@@ -114,3 +114,10 @@ textarea {
     text-decoration: none;
     font-weight: bold;
 }
+
+.logo {
+    top: 20px;
+    left: 20px;
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+}
