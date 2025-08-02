@@ -5,7 +5,6 @@ async function submitAnswer() {
     
     // raw answer take imput remove all special characters and convert to lowercase, even spaces
     const rawAnswer = answerInput.value.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
-    console.log('Raw answer:', rawAnswer);
 
     if (!rawAnswer) {
         errorMessage.textContent = 'Please enter an answer.';
