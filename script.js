@@ -17,12 +17,6 @@ async function submitAnswer() {
         errorMessage.textContent = '';
         const currentLevelNum = parseInt(levelTitle.replace('level', ''), 10);
 
-        if (currentLevelNum === 6) {
-            document.getElementById('questions').innerHTML = 
-            '<h1>Congratulations! and.. Happy Birthday</h1><p> Sometimes the only gift you get is experience.....😛</p>';
-            return;
-        }
-
         const nextLevelNum = currentLevelNum + 1;
         const nextLevelKey = `level${nextLevelNum}`;
         const encryptedHex = levelCode[nextLevelKey];
