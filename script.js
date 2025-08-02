@@ -2,7 +2,10 @@ async function submitAnswer() {
     const answerInput = document.getElementById('answer-input');
     const errorMessage = document.getElementById('error-message');
     const levelTitle = document.querySelector('h1').textContent.toLowerCase().replace(' ', '');
-    const rawAnswer = answerInput.value.trim().toLowerCase();
+    
+    // raw answer take imput remove all special characters and convert to lowercase, even spaces
+    const rawAnswer = answerInput.value.trim().toLowerCase().replace(/[^a-z0-9:]/g, '');
+    console.log('Raw answer:', rawAnswer);
 
     if (!rawAnswer) {
         errorMessage.textContent = 'Please enter an answer.';
@@ -16,7 +19,7 @@ async function submitAnswer() {
         const currentLevelNum = parseInt(levelTitle.replace('level', ''), 10);
 
         if (currentLevelNum === 11) {
-            document.getElementById('answers').innerHTML = '<h1>Congratulations!</h1><p>You have completed all levels.</p>';
+            document.getElementById('answers').innerHTML = '<h1>Congratulations!</h1><p>Till Next time, To Be Continued....</p>';
             return;
         }
 

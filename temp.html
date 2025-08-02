@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id ="answers">
+        <h1>Level 2</h1>
+        <h3>Chess</h3>
+        <p>“You must take your opponent into a deep dark forest where 2+2=5, and the path leading out is only wide enough for one.” — Mikhail Tal</p>
+        <p>You are white, it's your move. you have to end the game in minimum moves. what will be your moves..<br>
+        <p>Enter the moves in the format: <strong>sourcedest:sourcedest:sourcedest</strong> for each move, separated by a colon.</p>
+        
+
+        <img src="./assets/img2.png" alt="level 1" class="level-image">
+        <p>Example: w:b:w -> <strong>f2e3:f4e3:g2g3</strong>
+        <input type="text" id="answer-input" placeholder="Your answer...">
+        <button class="button" onclick="submitAnswer()">Submit</button>
+        <p id="error-message"></p>
+    </div>
+    <script src="levels.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
