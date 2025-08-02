@@ -4,7 +4,7 @@ async function submitAnswer() {
     const levelTitle = document.querySelector('h1').textContent.toLowerCase().replace(' ', '');
     
     // raw answer take imput remove all special characters and convert to lowercase, even spaces
-    const rawAnswer = answerInput.value.trim().toLowerCase().replace(/[^a-z0-9:]/g, '');
+    const rawAnswer = answerInput.value.trim().toLowerCase().replace(/[^a-z0-9]/g, '');
     console.log('Raw answer:', rawAnswer);
 
     if (!rawAnswer) {
@@ -20,7 +20,7 @@ async function submitAnswer() {
 
         if (currentLevelNum === 6) {
             document.getElementById('questions').innerHTML = 
-            '<h1>Congratulations! and Happy Birthday</h1><p>Till Next time, To be continue....😛</p>';
+            '<h1>Congratulations! and.. Happy Birthday</h1><p>Till Next time, To be continue....😛</p>';
             return;
         }
 
@@ -30,6 +30,7 @@ async function submitAnswer() {
 
         try {
             const decryptedHtml = await decryptData(encryptedHex, rawAnswer);
+            console.log('Decrypted HTML:', decryptedHtml);
             document.getElementById('questions').innerHTML = decryptedHtml;
         } catch (error) {
             console.error('Decryption failed:', error);
