@@ -18,7 +18,7 @@ async function submitAnswer() {
         errorMessage.textContent = '';
         const currentLevelNum = parseInt(levelTitle.replace('level', ''), 10);
 
-        if (currentLevelNum === 7) {
+        if (currentLevelNum === 6) {
             document.getElementById('questions').innerHTML = 
             '<h1>Congratulations! and Happy Birthday</h1><p>Till Next time, To be continue....😛</p>';
             return;
