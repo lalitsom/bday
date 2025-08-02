@@ -97,3 +97,61 @@ async function decryptData(encryptedHex, password) {
 
     return new TextDecoder().decode(decryptedBuffer);
 }
+
+async function encryptData(plaintext, password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(plaintext);
+
+    // Generate a random 8-byte salt
+    const salt = crypto.getRandomValues(new Uint8Array(8));
+
+    // Derive key and IV from password and salt using PBKDF2
+    const passwordKey = await crypto.subtle.importKey(
+        'raw',
+        encoder.encode(password), {
+            name: 'PBKDF2'
+        },
+        false,
+        ['deriveBits']
+    );
+
+    const derivedBits = await crypto.subtle.deriveBits({
+            name: 'PBKDF2',
+            salt: salt,
+            iterations: 10000,
+            hash: 'SHA-256',
+        },
+        passwordKey,
+        256 + 128 // 32-byte key + 16-byte IV
+    );
+
+    const key = derivedBits.slice(0, 32);
+    const iv = derivedBits.slice(32, 48);
+
+    const aesKey = await crypto.subtle.importKey(
+        'raw',
+        key, {
+            name: 'AES-CBC',
+            length: 256
+        },
+        false,
+        ['encrypt']
+    );
+
+    const encryptedBuffer = await crypto.subtle.encrypt({
+            name: 'AES-CBC',
+            iv: iv
+        },
+        aesKey,
+        data
+    );
+
+    // Prepend "Salted__" and the salt to the ciphertext
+    const saltedCiphertext = new Uint8Array(8 + salt.length + encryptedBuffer.byteLength);
+    saltedCiphertext.set(encoder.encode('Salted__'));
+    saltedCiphertext.set(salt, 8);
+    saltedCiphertext.set(new Uint8Array(encryptedBuffer), 16);
+
+    // Convert to hex string
+    return Array.from(saltedCiphertext).map(b => b.toString(16).padStart(2, '0')).join('');
+}
