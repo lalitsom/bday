@@ -19,7 +19,7 @@ async function submitAnswer() {
 
         if (currentLevelNum === 6) {
             document.getElementById('questions').innerHTML = 
-            '<h1>Congratulations! and.. Happy Birthday</h1><p>Till Next time, To be continue....😛</p>';
+            '<h1>Congratulations! and.. Happy Birthday</h1><p> Sometimes the only gift you get is experience.....😛</p>';
             return;
         }
 
